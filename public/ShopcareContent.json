@@ -1,0 +1,215 @@
+{
+  "features": [
+    {
+    "title": "Outstanding View of all Customers & Supplier in single interface",
+    "description":
+      "The software provides a unified interface to view all outstanding balances for customers & suppliers, making it easy to manage receivables and payables efficiently.",
+    "category": "special",
+    "icon": "Users",
+    "order": 1
+  },
+  {
+    "title": "Smart Customer Engagement",
+    "description": "Automated customer engagement with personalized SMS & Email.",
+    "category": "special",
+    "icon": "Mail",
+    "order": 2
+  },
+  {
+    "title": "Stock Statement with Valuation & Supplier-wise Stock Statement",
+    "description":
+      "Offers detailed stock statements with valuation & supplier-wise breakdowns, allowing businesses to monitor inventory levels & assess stock value effectively.",
+    "category": "special",
+    "icon": "Users",
+    "order": 3
+  },
+  {
+    "title": "POS (Point of sales system with Inventory & Barcode)",
+    "description":
+      "Complete POS with Inventory & Barcode management for retail operations.",
+    "category": "main",
+    "icon": "ShoppingCart",
+    "order": 1
+  },
+  {
+    "title": "Quotation, Purchase, Sales, Delivery Challan",
+    "description": "Easy-to-use interfaces for all business operations.",
+    "category": "main",
+    "icon": "FileText",
+    "order": 2
+  },
+  {
+    "title": "Very easy purchase, sale & return facility",
+    "description": "Simplified purchase, sale, and return handling.",
+    "category": "benefit",
+    "icon": "RefreshCw"
+  },
+  {
+    "title": "Quotation - GST, Non-GST Formats",
+    "description":
+      "Allows businesses to generate quotations with formats for GST and Non-GST transactions.",
+    "icon": "FileText",
+    "category": "workflow",
+    "order": 1
+  },
+  {
+    "title":
+      "Purchase Order (Only Inward Stock) Delivery challan & Challan Return",
+    "description":
+      "Streamlines inventory management by handling purchase orders exclusively for inward stock.",
+    "icon": "Package",
+    "category": "workflow",
+    "order": 2
+  },
+  {
+    "title": "Sales from Quotation & Delivery Challan",
+    "description":
+      "Seamless conversion of quotations and delivery challans into sales invoices, simplifying the sales process and ensuring accurate billing.",
+    "icon": "ShoppingBag",
+    "category": "workflow",
+    "order": 3
+  }
+  ],
+
+  "testimonials": [
+    {
+    "customer_name": "Santosh",
+    "business_name": "Santosh Automobiles",
+    
+    "image_url":
+      "https://ui-avatars.com/api/?name=Santosh&background=4F46E5&color=fff&size=200",
+   "address": "45, Esteem Park, Takili Phata, Dwarka, Nashik",
+    "contact_no": "9422271072"
+  },
+  {
+    "customer_name": "Rajendra Borde",
+    "business_name": "Borde Hardware and Electronics",
+    
+    "image_url":
+      "https://ui-avatars.com/api/?name=Rajendra+Borde&background=7C3AED&color=fff&size=200",
+   "address":
+      "Lakshsing Road, Nearby Dudhad Branch Post Office, Tal. Dudhad, Dist. Chhatrapati Sambhaji Nagar",
+    "contact_no": "9604907698"
+  },
+  {
+    "customer_name": "Shreenath Jadhav",
+    "business_name": "Shreenath Sanitary Ware Machinery & Electrical",
+   
+    "image_url":
+      "https://ui-avatars.com/api/?name=Shreenath+Jadhav&background=2563EB&color=fff&size=200",
+   "ddress": "Old Court, Pusad Road, Umarkhed, Dist. Yavatmal",
+    "contact_no": "9850863211"
+  },
+  {
+    "customer_name": "Nilesh",
+    "business_name": "Nilesh Hardware",
+   
+   "rating": 5,
+    "image_url":
+      "https://ui-avatars.com/api/?name=Nilesh&background=DC2626&color=fff&size=200",
+   "address": "Sakuri, Tal - Rahata, Dist - Ahilyanagar, 423107",
+    "contact_no": "9011117474"
+  },
+  {
+    "customer_name": "Saptashrungi",
+    "business_name": "Saptashrungi Mudranalaya & Stationery",
+   
+   "rating": 5,
+    "image_url":
+      "https://ui-avatars.com/api/?name=Saptashrungi&background=EA580C&color=fff&size=200",
+   "address":
+      "Murli Shakuntal Complex, Gala No. 30, Near Central Bank of India, Nashik Road, Sangamner-422605, Dist. A'Nagar",
+    "contact_no": "8446147269"
+  },
+  {
+    "customer_name": "Krushidhan",
+    "business_name": "Krushidhan Irrigation and Hardware",
+    
+   "rating": 4,
+    "image_url":
+      "https://ui-avatars.com/api/?name=Krushidhan&background=059669&color=fff&size=200",
+   "address": "Chinoda Chofuli, Chinoda Road, Taloda, Dist. Nandurbar",
+    "contact_no": "8830665838"
+  },
+  {
+    "customer_name": "Trimurti",
+    "business_name": "Trimurti Sales",
+  
+   "rating": 5,
+    "image_url":
+      "https://ui-avatars.com/api/?name=Trimurti&background=8B5CF6&color=fff&size=200",
+   "address":
+      "Rayatewadi Phata, Nashik Pune Highway, Tal-Sangamner, Ahmednagar - 422605",
+    "contact_no": "9657627356"
+  }
+  ],
+
+ "benefits": [
+    {
+      "id": 1,
+      "title": "Very easy purchase, sale and sales return facility.",
+      "icon": "RefreshCw"
+    },
+    {
+      "id": 2,
+      "title": "Cash / credit and wholesale price for sales.",
+      "icon": "DollarSign"
+    },
+    {
+      "id": 3,
+      "title": "Very easy and convenient billing form.",
+      "icon": "FileCheck"
+    },
+    {
+      "id": 4,
+      "title": "A printout of the bill can be prepared for each customer.",
+      "icon": "Printer"
+    },
+    {
+      "id": 5,
+      "title": "All the previous bills of the customer can be viewed in the current bill itself.",
+      "icon": "History"
+    }
+  ],
+
+  "faq": [
+    {
+    "question": "What is K Bazaar Billing Software?",
+    "answer":
+      "K Bazaar is a comprehensive POS (Point of Sale) billing software designed for retail businesses. It offers GST-compliant billing, inventory management, barcode support, and detailed business reports - all in one easy-to-use platform."
+  },
+  {
+    "question": "Is K Bazaar GST compliant?",
+    "answer":
+      "Yes, K Bazaar is 100% GST compliant. It automatically calculates GST for all transactions, generates GST-ready invoices, and provides reports that help you file your GST returns easily."
+  },
+  {
+    "question": "Can I use K Bazaar on multiple devices?",
+    "answer":
+      "Absolutely! K Bazaar supports multi-device usage. You can access your business data from desktop computers, laptops, and even mobile devices, keeping your business connected at all times."
+  },
+  {
+    "question": "Do you provide customer support?",
+    "answer":
+      "Yes, we provide 24/7 customer support. Our dedicated team is always ready to assist you with any queries, technical issues, or training needs. We also offer video tutorials and documentation."
+  },
+  {
+    "question": "How secure is my business data?",
+    "answer":
+      "Your data security is our top priority. K Bazaar uses advanced encryption, regular backups, and secure cloud storage to ensure your business data is always protected and accessible."
+  },
+  {
+    "question": "Can I try K Bazaar before purchasing?",
+    "answer":
+      "Yes! We offer a free demo so you can explore all features before making a decision. Contact our sales team to schedule a personalized demo for your business."
+  }
+  ],
+
+   "videos": [
+    {
+      "id": "cgPNFA8y_U0",
+      "title": "K Bazaar Demo Video",
+      "description": "Complete walkthrough and billing demo for K Bazaar."
+    }
+  ]
+}

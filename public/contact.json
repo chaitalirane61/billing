@@ -1,0 +1,36 @@
+{
+  "contactInfo": [
+    {
+      "id": 1,
+      "title": "Phone",
+      "icon": "Phone",
+      "details1": "+91 7798798679",
+      "details2": "Mon–Fri 9AM–6PM"
+    },
+    {
+      "id": 2,
+      "title": "Email",
+      "icon": "Mail",
+      "details1": "soulsoftinfotech@gmail.com",
+      "details2": "We respond within 2 hours"
+    },
+    {
+      "id": 3,
+      "title": "Support Hours",
+      "icon": "Clock",
+      "details1": "24/7 Online Support",
+      "details2": "Mon–Fri 9AM–6PM"
+    },
+    {
+      "id": 4,
+      "title": "Office",
+      "icon": "MapPin",
+      "details1": [
+        "S 10-B, 2nd Floor, Top-Ten Imperial, Sangamner, 422605, A.Nagar",
+        "1003, A4, Aishwaryam Hamara, Dehu Alandi Road, Moshi Pune, 411062",
+        "Satpur, Behind Jogging Track, Near D-Mart & Reliance Petrol Pump, Nashik, 422007"
+      ],
+      "details2": ""
+    }
+  ]
+}

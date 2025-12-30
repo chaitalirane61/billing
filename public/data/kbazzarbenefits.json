@@ -1,0 +1,16 @@
+{
+  "benefits": [
+    {
+      "title": "Very Easy & Fast Barcode Billing Interface",
+      "description": "Generate bills quickly with a clean barcode interface for efficient checkout."
+    },
+    {
+      "title": "Different Stock Location",
+      "description": "Manage inventory separately for purchase at godown and sales from shop."
+    },
+    {
+      "title": "Separate Counter & Employee Management",
+      "description": "Assign counters and employees for better accountability and management."
+    }
+  ]
+}
