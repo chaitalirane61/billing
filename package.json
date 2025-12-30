@@ -15,7 +15,6 @@
     "@mui/material": "^7.3.5",
     "@mui/x-date-pickers": "^8.19.0",
     "@mui/x-date-pickers-pro": "^8.19.0",
-    "@netlify/plugin-nextjs": "^5.15.0",
     "@tanstack/react-query": "^5.90.10",
     "@tanstack/react-query-devtools": "^5.91.0",
     "antd": "^6.0.0",
@@ -38,6 +37,7 @@
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.0",
     "@tailwindcss/postcss": "^4.1.17",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.10",
