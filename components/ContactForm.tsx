@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/common/button";
 import { Input } from "@/components/common/input";
 import { Textarea } from "@/components/common/textarea";
-import { X, PhoneCall } from "lucide-react";
+import { X, PhoneCall, LucideIcon } from "lucide-react";
 import { useContactForm } from "@/hooks/useContactForm";
 import React from "react";
 import {
@@ -17,12 +17,21 @@ import {
 } from "lucide-react";
 
 // ICON MAP (string → lucide component)
-const icons: Record<string, any> = {
+const icons: Record<string, LucideIcon> = {
   Phone,
   Mail,
   Clock,
   MapPin,
 };
+type ContactPayload = {
+  fullName: string;
+  phone: string;
+  heardAboutUs: string;
+  message: string;
+  email?: string;
+  businessName?: string;
+};
+
 
 const hearAboutOptions = [
   "Google Search",
@@ -38,7 +47,7 @@ const hearAboutOptions = [
 ];
 
 export function ContactForm({ getContact = [] }) {
-  const [contactInfo, setContactInfo] = useState<any[]>([]);
+  const [contactInfo, setContactInfo] = useState<ContactInfoItem[]>([]);
   const ref = useRef<HTMLElement | null>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const { mutateAsync, isPending } = useContactForm();
@@ -158,7 +167,7 @@ export function ContactForm({ getContact = [] }) {
 
     try {
       // 🔥 SEND CONTACT DATA TO DATABASE
-      const payload: any = {
+      const payload: ContactPayload = {
         fullName: formData.name.trim(),
         phone: formData.phone.trim(),
         heardAboutUs:
@@ -196,20 +205,19 @@ export function ContactForm({ getContact = [] }) {
         hearAbout: "",
         hearAboutOther: "",
       });
-    } catch (error: any) {
-      console.error("Form submission error:", error);
-      
-      // Extract error message from various possible error formats
-      let errorMessage = "Failed to submit form. Please try again or contact us directly.";
-      
-      if (error?.message && error.message !== "[object Object]") {
-        errorMessage = error.message;
-      } else if (typeof error === "string") {
-        errorMessage = error;
-      }
-      
-      setSubmitError(errorMessage);
-    }
+    } catch (error: unknown) {
+  console.error("Form submission error:", error);
+
+  let errorMessage = "Failed to submit form. Please try again.";
+
+  if (error && typeof error === "object" && "message" in error) {
+    errorMessage = (error as { message: string }).message;
+  } else if (typeof error === "string") {
+    errorMessage = error;
+  }
+
+  setSubmitError(errorMessage);
+}
   };
 
   const inputBaseClasses =

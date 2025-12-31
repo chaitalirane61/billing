@@ -4,7 +4,7 @@ import Image from "next/image";
 import { LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import shopcare_logo from "@/public/images/shopcare_logo.jpg";
+import soulsoft_logo from "@/public/images/soulsoft_logo.png";
 
 interface HeaderProps {
   activeTab: "leads" | "subscribers";
@@ -22,14 +22,12 @@ export default function Header({
 
   // Load token when page loads
   useEffect(() => {
-    const savedToken = localStorage.getItem("adminToken");
-    setToken(savedToken);
+  const savedToken = localStorage.getItem("adminToken");
+  if (!savedToken) {
+    router.push("/admin");
+  }
+}, [router]);
 
-    // If no token → redirect to login
-    if (!savedToken) {
-      router.push("/admin");
-    }
-  }, [router]);
 
   // Logout functionality
   const handleLogout = () => {
@@ -48,7 +46,7 @@ export default function Header({
       {/* LEFT — LOGO */}
       <div className="flex items-center gap-2">
          <Image
-              src={shopcare_logo}
+              src={soulsoft_logo}
               alt="Shopcare Logo"
               className="w-30 h-18 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent"
               priority

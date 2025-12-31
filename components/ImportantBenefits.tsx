@@ -22,10 +22,15 @@ export default function KBazzarBenefits() {
         if (!response.ok) throw new Error("Failed to load benefits data");
         const data = await response.json();
         setBenefits(data.benefits || []);
-      } catch (err: any) {
-        console.error("Error loading benefits data:", err);
-        setError(err.message || "Error loading data");
-      } finally {
+      } catch (err: unknown) {
+  console.error("Error loading benefits data:", err);
+
+  const message =
+    err instanceof Error ? err.message : "Error loading data";
+
+  setError(message);
+}
+finally {
         setLoading(false);
       }
     };
