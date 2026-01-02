@@ -50,7 +50,7 @@ const iconMap = {
 
 export default function HowItWorks() {
   return (
-    <section className="py-24 bg-gradient-to-br from-gray-100 via-gray-200 to-blue-100">
+    <section   className="py-24 bg-gradient-to-br from-gray-100 via-gray-200 to-blue-100">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div

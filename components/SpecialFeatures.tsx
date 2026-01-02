@@ -1,314 +1,121 @@
-
-
-// "use client";
-
-// import React from "react";
-// import { motion, Variants } from "framer-motion";
-
-// import { Feature } from "@/app/types/features";
-// import mockData from "../lib/data/ShopcareContent.json";
-
-// import {
-//   Users,
-//   Database,
-//   MessageSquare,
-//   Shield,
-//   TrendingUp,
-//   Mail,
-//   ShoppingCart,
-//   BarChart2,
-//   FileText,
-//   RefreshCw,
-//   DollarSign,
-//   LucideIcon,
-// } from "lucide-react";
-
-// // Icon Mapping
-// const IconMap: Record<string, LucideIcon> = {
-//   Users,
-//   Database,
-//   MessageSquare,
-//   Shield,
-//   TrendingUp,
-//   Mail,
-//   ShoppingCart,
-//   BarChart2,
-//   FileText,
-//   RefreshCw,
-//   DollarSign,
-// };
-
-// // Gradient Palette
-// const gradientPalette = [
-//   "from-blue-500 to-cyan-400",
-//   "from-purple-500 to-pink-400",
-//   "from-orange-500 to-red-400",
-// ];
-
-// // Container animation variants
-// const containerVariants: Variants = {
-//   hidden: { opacity: 0 },
-//   visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-// };
-
-// // Card animation variants
-// const cardVariants: Variants = {
-//   hidden: { opacity: 0, y: 50 },
-//   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
-// };
-
-// // Card Component
-// const Card = ({
-//   icon: Icon,
-//   title,
-//   description,
-//   gradient,
-//   className = "",
-// }: {
-//   icon: LucideIcon;
-//   title: string;
-//   description: string;
-//   gradient: string;
-//   className?: string;
-// }) => (
-//   <motion.div
-//     variants={cardVariants}
-//     whileHover={{ y: -5 }}
-//     className={`bg-white rounded-3xl shadow-xl border border-slate-100 p-4 flex flex-col h-full ${className}`}
-//   >
-//     <div
-//       className={`w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br ${gradient} mb-4`}
-//     >
-//       <Icon className="w-7 h-7 text-white" />
-//     </div>
-
-//     <h3 className="text-2xl font-bold text-slate-800 mb-3 line-clamp-1">
-//       {title}
-//     </h3>
-
-//     <p className="text-base text-slate-600 flex-grow leading-relaxed line-clamp-4">
-//       {description}
-//     </p>
-//   </motion.div>
-// );
-
-// // Main Component
-// export default function SpecialFeatures() {
-//   // Get features from JSON and filter by "special" category
-//   // const allFeatures: Feature[] = mockData.features;
-//   const allFeatures = mockData.features as Feature[];
-//   const specialFeatures = allFeatures.filter((f) => f.category === "special");
-
-//   return (
-//     <section className="py-12 lg:py-16 px-6 bg-white relative">
-//       <div className="max-w-7xl mx-auto">
-//         {/* Header */}
-//         <motion.div
-//           initial={{ opacity: 0, y: 30 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 0.7 }}
-//           className="text-center mb-12"
-//         >
-//           <h2 className="text-4xl lg:text-5xl font-bold mb-3">
-//             <span className="text-slate-900">Our </span>
-//             <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-//               Special Features
-//             </span>
-//           </h2>
-//           <p className="text-lg text-slate-600">
-//             Advanced capabilities that set us apart from the competition.
-//           </p>
-//         </motion.div>
-
-//         {/* Features Grid */}
-//         <motion.div
-//           className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
-//           variants={containerVariants}
-//           initial="hidden"
-//           whileInView="visible"
-//           viewport={{ once: true, amount: 0.3 }}
-//         >
-//           {specialFeatures.map((feature, index) => {
-//             const IconComponent =
-//               feature.icon && IconMap[feature.icon] ? IconMap[feature.icon] : Users;
-//             const gradient = gradientPalette[index % gradientPalette.length];
-
-//             return (
-//               <Card
-//                 key={feature.title}
-//                 icon={IconComponent}
-//                 title={feature.title}
-//                 description={feature.description}
-//                 gradient={gradient}
-//                 className="h-full"
-//               />
-//             );
-//           })}
-//         </motion.div>
-//       </div>
-//     </section>
-//   );
-// }
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 
-import { Feature } from "@/app/types/features";
-
-import {
-  Users,
-  Database,
-  MessageSquare,
-  Shield,
-  TrendingUp,
-  Mail,
-  ShoppingCart,
-  BarChart2,
-  FileText,
-  RefreshCw,
-  DollarSign,
-  LucideIcon,
-} from "lucide-react";
-
-// Icon Mapping
-const IconMap: Record<string, LucideIcon> = {
-  Users,
-  Database,
-  MessageSquare,
-  Shield,
-  TrendingUp,
-  Mail,
-  ShoppingCart,
-  BarChart2,
-  FileText,
-  RefreshCw,
-  DollarSign,
-};
-
-// Gradient Palette
-const gradientPalette = [
-  "from-blue-500 to-cyan-400",
-  "from-purple-500 to-pink-400",
-  "from-orange-500 to-red-400",
-];
-
-// Container animation variants
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-};
-
-// Card animation variants
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
-};
-
-// Card Component
-const Card = ({
-  icon: Icon,
-  title,
-  description,
-  gradient,
-  className = "",
-}: {
-  icon: LucideIcon;
+interface Feature {
+  icon: string;
   title: string;
   description: string;
-  gradient: string;
-  className?: string;
-}) => (
-  <motion.div
-    variants={cardVariants}
-    whileHover={{ y: -5 }}
-    className={`bg-white rounded-3xl shadow-xl border border-slate-100 p-4 flex flex-col h-full ${className}`}
-  >
-    <div
-      className={`w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br ${gradient} mb-4`}
-    >
-      <Icon className="w-7 h-7 text-white" />
-    </div>
+}
 
-    <h3 className="text-2xl font-bold text-slate-800 mb-3 line-clamp-1">
-      {title}
-    </h3>
+interface Blob {
+  top: string;
+  left: string;
+  size: number;
+  rotate: number;
+  duration: number;
+}
 
-    <p className="text-base text-slate-600 flex-grow leading-relaxed line-clamp-4">
-      {description}
-    </p>
-  </motion.div>
-);
+// Features data
+const features: Feature[] = [
+  { icon: "📊", title: "Smart GST Billing", description: "Automated GST billing for all transactions." },
+  { icon: "📦", title: "Inventory Management", description: "Track stock across multiple locations in real-time." },
+  { icon: "🔍", title: "Barcode / QR Support", description: "Scan products instantly using barcode or QR codes." },
+  { icon: "👥", title: "Customer Tracking", description: "Monitor customer purchases and loyalty points." },
+  { icon: "⚡", title: "Fast Billing Interface", description: "Lightning-fast interface to reduce billing time." },
+  { icon: "💳", title: "Multiple Payment Methods", description: "Accept cash, card, UPI, or wallet payments seamlessly." },
+];
 
-// Main Component
 export default function SpecialFeatures() {
-  const [features, setFeatures] = useState<Feature[]>([]);
+  const [blobs, setBlobs] = useState<Blob[]>([]);
 
+  // Generate blobs only on the client after mount
   useEffect(() => {
-    const fetchFeatures = async () => {
-      try {
-        const res = await fetch("/ShopcareContent.json");
-        const data = await res.json();
-        const allFeatures = data.features as Feature[];
-        const specialFeatures = allFeatures.filter((f) => f.category === "special");
-        setFeatures(specialFeatures);
-      } catch (err) {
-        console.error("Error fetching features:", err);
-      }
-    };
-
-    fetchFeatures();
+    const id = setTimeout(() => {
+      const generated = Array.from({ length: 6 }).map(() => ({
+        top: `${Math.random() * 70 + 15}%`,
+        left: `${Math.random() * 70 + 15}%`,
+        size: Math.random() * 180 + 120,
+        rotate: Math.random() * 360,
+        duration: 18 + Math.random() * 8,
+      }));
+      setBlobs(generated);
+    }, 0);
+    return () => clearTimeout(id);
   }, []);
 
+  // Card animation variants
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 250, damping: 20 } },
+    hover: {
+      scale: 1.05,
+      boxShadow: "0 20px 40px rgba(50, 50, 50, 0.3), 0 0 30px rgba(100, 100, 100, 0.2)",
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
+  };
+
+  const containerVariants: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.15 } },
+  };
+
+  const iconVariants: Variants = {
+    float: {
+      y: [0, -10, 0],
+      transition: { duration: 1.5, repeat: Infinity, repeatType: "loop", ease: "easeInOut" },
+    },
+  };
+
   return (
-    <section className="py-12 lg:py-16 px-6 bg-white relative">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-3">
-            <span className="text-slate-900">Our </span>
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-              Special Features
-            </span>
-          </h2>
-          <p className="text-lg text-slate-600">
-            Advanced capabilities that set us apart from the competition.
-          </p>
-        </motion.div>
+    <div className="relative min-h-screen bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 overflow-hidden py-16 px-4 sm:px-6 lg:px-16">
 
-        {/* Features Grid */}
+      {/* Floating Grey Blobs */}
+      {blobs.map((blob, i) => (
         <motion.div
-          className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {features.map((feature, index) => {
-            const IconComponent =
-              feature.icon && IconMap[feature.icon] ? IconMap[feature.icon] : Users;
-            const gradient = gradientPalette[index % gradientPalette.length];
+          key={i}
+          animate={{ y: [0, -40, 0], x: [0, 30, 0], rotate: [blob.rotate, blob.rotate + 50, blob.rotate] }}
+          transition={{ duration: blob.duration, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute rounded-full bg-gradient-to-br from-gray-300/40 via-gray-400/30 to-gray-500/20 blur-3xl pointer-events-none"
+          style={{ top: blob.top, left: blob.left, width: blob.size, height: blob.size }}
+        />
+      ))}
 
-            return (
-              <Card
-                key={feature.title}
-                icon={IconComponent}
-                title={feature.title}
-                description={feature.description}
-                gradient={gradient}
-                className="h-full"
-              />
-            );
-          })}
-        </motion.div>
+      {/* Header */}
+      <div className="relative z-10 text-center max-w-4xl mx-auto mb-16">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold mb-4 bg-clip-text text-transparent
+                       bg-gradient-to-r from-gray-600 via-gray-500 to-gray-700 whitespace-nowrap">
+          K-Bazzar Billing Software
+        </h1>
+        <p className="text-gray-700 text-lg sm:text-xl">
+          Explore the powerful tools that make K-Bazzar the ultimate solution for grocery business management.
+        </p>
       </div>
-    </section>
+
+      {/* Features Grid */}
+      <motion.div
+        className="relative z-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
+        {features.map((feature, idx) => (
+          <motion.div
+            key={idx}
+            variants={cardVariants}
+            whileHover="hover"
+            className="relative p-6 rounded-2xl backdrop-blur-md bg-white/20 border border-white/20 flex flex-col items-center text-center cursor-pointer transition-all"
+          >
+            <motion.div className="text-6xl mb-4 text-gray-700" variants={iconVariants} animate="float">
+              {feature.icon}
+            </motion.div>
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">{feature.title}</h3>
+            <p className="text-sm sm:text-base text-gray-700">{feature.description}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
   );
 }

@@ -93,7 +93,7 @@ finally {
                 transition={{ duration: 0.3 }}
                 className="bg-white/20 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/30 cursor-pointer"
               >
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 text-white">
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
                   {benefit.title}
                 </h3>
                 <p className="text-white/90 text-sm md:text-base">{benefit.description}</p>

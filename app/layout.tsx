@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 // import logo from "@/public/images/shopcare_logo.jpg";
 export const metadata: Metadata = {
   metadataBase: new URL("https://shopcare.soulsoftsks.in"), // Update with actual production URL
-  title: "Shopcare Billing Software",
+  title: "K-Bazaar Billing Software",
   description:
     "Shopcare Billing Software helps hardware stores and retail businesses manage billing, inventory, GST invoices, sales, purchases, and stock with speed, accuracy, and ease.",
 

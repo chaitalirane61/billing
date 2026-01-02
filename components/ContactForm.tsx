@@ -231,7 +231,7 @@ export function ContactForm({ getContact = [] }) {
 
   return (
     <section
-      id="contact"
+      id="contact-us"
       ref={ref}
       className="py-8 sm:py-12 lg:py-16 xl:py-20 px-3 sm:px-4 lg:px-6 xl:px-20 bg-white relative"
     >

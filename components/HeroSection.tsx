@@ -1,159 +1,241 @@
- "use client";
+"use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight, Play } from "lucide-react";
-import { Button } from "@/components/common/button";
 
-export default function KiranaHero3D() {
+interface Feature {
+  icon: string;
+  label: string;
+}
+
+interface Blob {
+  top: string;
+  left: string;
+  size: number;
+  rotate: number;
+  duration: number;
+}
+
+interface IconItem {
+  icon: string;
+  top: string;
+  left: string;
+  size: number;
+  rotate: number;
+  duration: number;
+  delay: number;
+}
+
+const features: Feature[] = [
+  { icon: "📊", label: "Smart GST Billing" },
+  { icon: "📦", label: "Inventory Management" },
+  { icon: "🔍", label: "Barcode / QR Support" },
+  { icon: "👥", label: "Customer Tracking" },
+  { icon: "⚡", label: "Fast Billing Interface" },
+];
+
+const iconElements = [
+  "💰","🧾","🛒","📦","🔖","📊","💳","⏰",
+  "💵","📈","🖩","📇","📱","🧮","🔄","📌"
+];
+
+// Generate randomness ONCE
+const GENERATED_BLOBS: Blob[] = Array.from({ length: 6 }).map(() => ({
+  top: `${Math.random() * 70 + 10}%`,
+  left: `${Math.random() * 70 + 10}%`,
+  size: Math.random() * 120 + 60,
+  rotate: Math.random() * 360,
+  duration: 15 + Math.random() * 10,
+}));
+
+const GENERATED_ICONS: IconItem[] = Array.from({ length: 15 }).map(() => ({
+  icon: iconElements[Math.floor(Math.random() * iconElements.length)],
+  top: `${Math.random() * 70 + 10}%`,
+  left: `${Math.random() * 70 + 10}%`,
+  size: Math.random() * 18 + 12,
+  rotate: Math.random() * 360,
+  duration: Math.random() * 6 + 4,
+  delay: Math.random() * 2,
+}));
+
+export default function HeroSection() {
+  const blobs = GENERATED_BLOBS;
+  const icons = GENERATED_ICONS;
+
+  const featureVariants: Variants = {
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { delay: i * 0.1, type: "spring", stiffness: 300 },
+    }),
+  };
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
-      className="relative w-full pt-32 pb-24 overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #F5F5F7, #D8D8DD)", // Whitish grey gradient
-      }}
+      className="relative w-full min-h-screen overflow-hidden pt-16 sm:pt-20 md:pt-24 lg:pt-10"
+      style={{ background: "linear-gradient(135deg, #d1d1d1ff, #9bb0d6, #4a7bd5)" }}
     >
-      {/* Soft Metallic Glow */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.25 }}
-        transition={{ duration: 1 }}
-        className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#C7C8CC] rounded-full blur-[140px]"
-      />
-
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-
-        {/* LEFT CONTENT */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="space-y-6 mt-6 max-w-lg"
-        >
-          {/* Heading */}
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#2A2A2A] leading-tight">
-            K-Bazzar Billing Software
-          </h2>
-
-          <p className="text-lg text-[#4A4A4A] leading-relaxed">
-            Solid solution to solve various problems in your grocery business –{" "}
-            <strong className="text-[#1A1A1A] font-semibold">‘Kirana Bazaar’ software!</strong>
-          </p>
-
-          <p className="text-base text-[#555] leading-relaxed">
-            Now your focus will be fully on customer service and business growth because this software handles everything smoothly.
-          </p>
-
-          {/* Buttons */}
+      {/* FLOATING BLOBS */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {blobs.map((blob, i) => (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-wrap gap-4 pt-4"
-          >
-             
+            key={i}
+            animate={{
+              y: [0, -40, 0],
+              x: [0, 20, 0],
+              rotate: [blob.rotate, blob.rotate + 30, blob.rotate],
+              opacity: [0.2, 0.5, 0.2],
+            }}
+            transition={{ duration: blob.duration, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute rounded-full blur-3xl"
+            style={{
+              top: blob.top,
+              left: blob.left,
+              width: blob.size,
+              height: blob.size,
+              background: "radial-gradient(circle, #e0e0e0, #4a7bd5, #1a3c8b)",
+            }}
+          />
+        ))}
 
-            {/* Demo Button */}
-            <motion.a href="#demo" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="h-12 px-6 border-2 border-[#A8A8A8] text-[#2A2A2A] hover:bg-[#E5E5E5] rounded-xl text-base font-semibold flex items-center">
-                <Play className="mr-2 w-4 h-4" />
-                Watch Demo
-              </Button>
-            </motion.a>
+        {icons.map((item, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -25, 0],
+              x: [0, 15, 0],
+              rotate: [item.rotate, item.rotate + 25, item.rotate],
+              opacity: [0.1, 0.4, 0.1],
+              scale: [1, 1.15, 1],
+            }}
+            transition={{
+              duration: item.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: item.delay,
+            }}
+            className="absolute select-none"
+            style={{
+              top: item.top,
+              left: item.left,
+              fontSize: item.size,
+              color: "#1a3c8b",
+              textShadow: "0 0 3px #fff, 0 0 6px #4a7bd5",
+            }}
+          >
+            {item.icon}
           </motion.div>
-        </motion.div>
+        ))}
+      </div>
 
-        {/* RIGHT — 3D FLIP CARD */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, delay: 0.3 }}
-          className="relative"
-        >
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            {/* FLIP CARD CONTAINER */}
-            <div
-              className="relative w-full h-[420px] rounded-3xl cursor-pointer"
-              style={{ perspective: 1000 }}
+      {/* MAIN CONTENT */}
+      <div className="relative z-10 flex flex-col md:flex-row h-full items-center justify-center md:justify-between px-4 sm:px-8 lg:px-16 py-8">
+
+        {/* LEFT SIDE TEXT */}
+        <div className="max-w-xl text-center md:text-left space-y-4">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-gradient-metallic leading-tight">
+            K-Bazzar Billing <br /> Software
+          </h1>
+
+          <p className="text-gray-700 text-md">
+            Solid solution to solve various problems in your grocery business – ‘Kirana Bazaar’ software!
+          </p>
+
+          <p className="text-gray-700 text-md">
+            Focus fully on customer service and business growth while this software handles everything smoothly.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start mt-4">
+            <motion.button
+              onClick={() => scrollToSection("product-demo")}
+              whileHover={{ scale: 1.05 }}
+              className="h-11 px-6 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-lg shadow flex items-center gap-2"
             >
-              <motion.div
-                className="relative w-full h-full rounded-3xl"
-                initial={{ rotateY: 0 }}
-                whileHover={{ rotateY: 180 }}
-                transition={{ duration: 0.9, ease: "easeInOut" }}
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                {/* FRONT SIDE */}
-                <div
-                  className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border border-slate-200"
-                  style={{
-                    backfaceVisibility: "hidden",
-                    background:
-                      "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(220,220,220,0.8))",
-                  }}
-                >
-                  <img
-                    src="https://soulsoft.in/wp-content/uploads/2025/04/Pending-stock-report-1536x1249.png"
-                    className="w-full h-full object-cover rounded-3xl"
-                    alt="Dashboard"
-                  />
-                </div>
+              <Play className="inline w-5 h-5" /> Watch Demo
+            </motion.button>
 
-                {/* BACK SIDE */}
-                <div
-  className="absolute inset-0 w-full h-full rounded-3xl p-6 flex flex-col justify-center"
-  style={{
-    transform: "rotateY(180deg)",
-    backfaceVisibility: "hidden",
-    background: "linear-gradient(145deg, #f8f8f8, #e6e6e6)",
-    border: "1px solid rgba(200,200,200,0.8)",
-    boxShadow:
-      "inset 0 0 20px rgba(255,255,255,0.5), inset 0 0 25px rgba(0,0,0,0.05), 0 20px 40px rgba(0,0,0,0.2)",
-  }}
->
+            <motion.button
+              onClick={() => scrollToSection("contact-us")}
+              whileHover={{ scale: 1.05 }}
+              className="h-11 px-6 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-lg shadow flex items-center gap-2"
+            >
+              Contact Us <ArrowRight className="inline w-5 h-5" />
+            </motion.button>
+          </div>
+        </div>
 
-                  <h3 className="text-3xl font-extrabold mb-5 text-[#2A2A2A] text-center">
-                    Kirana Bazaar Features
-                  </h3>
+        {/* RIGHT SIDE FLIP CARD */}
+        <div className="relative w-full max-w-[300px] sm:max-w-[500px] h-[280px] sm:h-[430px] perspective-1000 group cursor-pointer mt-10 md:mt-16">
+          <div className="relative w-full h-full preserve-3d transition-transform duration-700 group-hover:rotate-y-180 group-hover:scale-105">
 
-                  <div className="grid grid-cols-2 gap-4 text-center">
-                    {[
-                      { icon: "📊", label: "Smart GST Billing" },
-                      { icon: "📦", label: "Inventory Management" },
-                      { icon: "🔍", label: "Barcode / QR Support" },
-                      { icon: "👥", label: "Customer Tracking" },
-                      { icon: "⚡", label: "Fast Billing Interface", span: 2 },
-                    ].map((feature, index) => (
-                      <motion.div
-                        key={index}
-                        className={`rounded-xl p-3 flex flex-col items-center justify-center shadow-md bg-white/40 hover:scale-105 transition-transform ${
-                          feature.span ? "col-span-2" : ""
-                        }`}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 * index }}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <span className="text-2xl">{feature.icon}</span>
-                        <p className="mt-2 font-medium text-[#2A2A2A]">
-                          {feature.label}
-                        </p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating metallic shadow */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-72 h-10 bg-[#BFC0C2]/40 blur-3xl rounded-full" />
+            {/* FRONT */}
+            <div className="absolute inset-0 rounded-xl overflow-hidden shadow-xl backface-hidden border border-gray-300"
+              style={{ background: "linear-gradient(135deg, #9bb0d6, #9bb0d6, #4a7bd5)" }}>
+              <Image
+                src="https://soulsoft.in/wp-content/uploads/2025/04/Pending-stock-report-1536x1249.png"
+                alt="Pending Stock Report"
+                fill
+                className="object-cover opacity-90"
+              />
             </div>
-          </motion.div>
-        </motion.div>
+
+            {/* BACK */}
+            <div
+              className={`
+                absolute inset-0 rotate-y-180 backface-hidden 
+                rounded-xl shadow-xl p-4 flex flex-col justify-center 
+                border border-gray-400
+              `}
+              style={{ background: "linear-gradient(135deg, #9bb0d6, #9bb0d6, #4a7bd5)" }}
+            >
+              <h3 className="text-xl font-bold text-center text-black mb-4 drop-shadow">
+                Kirana Bazaar Features
+              </h3>
+
+              <motion.div className="grid grid-cols-2 gap-3" initial="hidden" animate="visible">
+                {features.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    custom={i}
+                    variants={featureVariants}
+                    whileHover={{ scale: 1.1 }}
+                    className={`
+                      flex flex-col items-center bg-white/70 rounded-xl p-3 shadow 
+                      text-gray-800 font-semibold
+                      ${i === 4 ? "col-span-2 mx-auto w-2/3" : ""}
+                    `}
+                  >
+                    <div className="text-2xl">{item.icon}</div>
+                    <div className="text-sm">{item.label}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+
+          </div>
+        </div>
 
       </div>
+
+      <style jsx>{`
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .perspective-1000 { perspective: 1000px; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .text-gradient-metallic {
+          background: linear-gradient(135deg, #0e0759ff, #4a7bd5, #082975ff);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      `}</style>
     </section>
   );
 }
