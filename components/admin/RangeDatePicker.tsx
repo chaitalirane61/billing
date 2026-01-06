@@ -88,7 +88,11 @@ export const RangeDatePicker: React.FC<NonFormikRangeDatepickerProps> = ({
         }}
         format={format} // ✅ Apply format for input and output
         placeholder={["Start date", "End date"]}
-        popupClassName="custom-date-picker-popup"
+        classNames={{
+  popup: {
+    root: "custom-date-picker-popup"
+  }
+}}
         {...rangePickerProps}
       />
       {/* <label

@@ -37,33 +37,47 @@ const features: Feature[] = [
 ];
 
 const iconElements = [
-  "💰","🧾","🛒","📦","🔖","📊","💳","⏰",
-  "💵","📈","🖩","📇","📱","🧮","🔄","📌"
+  "💰", "🧾", "🛒", "📦", "🔖", "📊", "💳", "⏰",
+  "💵", "📈", "🖩", "📇", "📱", "🧮", "🔄", "📌"
 ];
 
-// Generate randomness ONCE
-const GENERATED_BLOBS: Blob[] = Array.from({ length: 6 }).map(() => ({
-  top: `${Math.random() * 70 + 10}%`,
-  left: `${Math.random() * 70 + 10}%`,
-  size: Math.random() * 120 + 60,
-  rotate: Math.random() * 360,
-  duration: 15 + Math.random() * 10,
-}));
-
-const GENERATED_ICONS: IconItem[] = Array.from({ length: 15 }).map(() => ({
-  icon: iconElements[Math.floor(Math.random() * iconElements.length)],
-  top: `${Math.random() * 70 + 10}%`,
-  left: `${Math.random() * 70 + 10}%`,
-  size: Math.random() * 18 + 12,
-  rotate: Math.random() * 360,
-  duration: Math.random() * 6 + 4,
-  delay: Math.random() * 2,
-}));
-
 export default function HeroSection() {
-  const blobs = GENERATED_BLOBS;
-  const icons = GENERATED_ICONS;
+  /** -------------------------------
+   *  FIX: Prevent SSR hydration mismatch
+   * ------------------------------- */
+  const [mounted, setMounted] = React.useState(false);
 
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  /** Generate blobs ONLY after mount */
+  const blobs = React.useMemo<Blob[]>(() => {
+    if (!mounted) return [];
+    return Array.from({ length: 6 }).map(() => ({
+      top: `${Math.random() * 70 + 10}%`,
+      left: `${Math.random() * 70 + 10}%`,
+      size: Math.random() * 120 + 100,
+      rotate: Math.random() * 360,
+      duration: 15 + Math.random() * 10,
+    }));
+  }, [mounted]);
+
+  /** Generate icons ONLY after mount */
+  const icons = React.useMemo<IconItem[]>(() => {
+    if (!mounted) return [];
+    return Array.from({ length: 15 }).map(() => ({
+      icon: iconElements[Math.floor(Math.random() * iconElements.length)],
+      top: `${Math.random() * 70 + 10}%`,
+      left: `${Math.random() * 70 + 10}%`,
+      size: Math.random() * 18 + 12,
+      rotate: Math.random() * 360,
+      duration: Math.random() * 6 + 4,
+      delay: Math.random() * 2,
+    }));
+  }, [mounted]);
+
+  /** Feature animations */
   const featureVariants: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.9 },
     visible: (i: number) => ({
@@ -74,6 +88,7 @@ export default function HeroSection() {
     }),
   };
 
+  /** Scroll helper */
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -83,7 +98,7 @@ export default function HeroSection() {
       className="relative w-full min-h-screen overflow-hidden pt-16 sm:pt-20 md:pt-24 lg:pt-10"
       style={{ background: "linear-gradient(135deg, #d1d1d1ff, #9bb0d6, #4a7bd5)" }}
     >
-      {/* FLOATING BLOBS */}
+      {/* FLOATING BLOBS & ICONS */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {blobs.map((blob, i) => (
           <motion.div
@@ -101,7 +116,7 @@ export default function HeroSection() {
               left: blob.left,
               width: blob.size,
               height: blob.size,
-              background: "radial-gradient(circle, #e0e0e0, #4a7bd5, #1a3c8b)",
+              background: "radial-gradient(circle, #e0e0e0, #4a7bd5, #1a3c8b)"
             }}
           />
         ))}
@@ -114,13 +129,13 @@ export default function HeroSection() {
               x: [0, 15, 0],
               rotate: [item.rotate, item.rotate + 25, item.rotate],
               opacity: [0.1, 0.4, 0.1],
-              scale: [1, 1.15, 1],
+              scale: [1, 1.15, 1]
             }}
             transition={{
               duration: item.duration,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: item.delay,
+              delay: item.delay
             }}
             className="absolute select-none"
             style={{
@@ -128,7 +143,7 @@ export default function HeroSection() {
               left: item.left,
               fontSize: item.size,
               color: "#1a3c8b",
-              textShadow: "0 0 3px #fff, 0 0 6px #4a7bd5",
+              textShadow: "0 0 3px #fff, 0 0 6px #4a7bd5"
             }}
           >
             {item.icon}
@@ -139,7 +154,7 @@ export default function HeroSection() {
       {/* MAIN CONTENT */}
       <div className="relative z-10 flex flex-col md:flex-row h-full items-center justify-center md:justify-between px-4 sm:px-8 lg:px-16 py-8">
 
-        {/* LEFT SIDE TEXT */}
+        {/* LEFT SIDE CONTENT */}
         <div className="max-w-xl text-center md:text-left space-y-4">
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-gradient-metallic leading-tight">
             K-Bazzar Billing <br /> Software
@@ -152,24 +167,43 @@ export default function HeroSection() {
           <p className="text-gray-700 text-md">
             Focus fully on customer service and business growth while this software handles everything smoothly.
           </p>
+<div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start mt-4">
+  {/* WATCH DEMO */}
+  <a href="#product-demo"> 
+  <motion.button
+    onClick={() => scrollToSection("product-demo")}
+    whileHover={{ scale: 1.05 }}
+    className="
+      h-11 px-6 text-base
+      sm:h-12 sm:px-7 sm:text-lg
+      md:h-12 md:px-8 md:text-lg
+      bg-gradient-to-r from-blue-700 to-blue-500
+      text-white rounded-lg shadow flex items-center gap-2
+    "
+  >
+    <Play className="w-5 h-5 sm:w-6 sm:h-6" />
+    Watch Demo
+  </motion.button></a>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start mt-4">
-            <motion.button
-              onClick={() => scrollToSection("product-demo")}
-              whileHover={{ scale: 1.05 }}
-              className="h-11 px-6 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-lg shadow flex items-center gap-2"
-            >
-              <Play className="inline w-5 h-5" /> Watch Demo
-            </motion.button>
+  {/* CONTACT BUTTON */}
+  <a href="#contact">
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      className="
+        h-11 px-6 text-base
+        sm:h-12 sm:px-7 sm:text-lg
+        md:h-12 md:px-8 md:text-lg
+        bg-gradient-to-r from-blue-700 to-blue-500
+        text-white rounded-lg shadow flex items-center gap-2
+      "
+    >
+      Contact Us
+      <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+    </motion.button>
+  </a>
+</div>
 
-            <motion.button
-              onClick={() => scrollToSection("contact-us")}
-              whileHover={{ scale: 1.05 }}
-              className="h-11 px-6 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-lg shadow flex items-center gap-2"
-            >
-              Contact Us <ArrowRight className="inline w-5 h-5" />
-            </motion.button>
-          </div>
+
         </div>
 
         {/* RIGHT SIDE FLIP CARD */}
@@ -177,8 +211,10 @@ export default function HeroSection() {
           <div className="relative w-full h-full preserve-3d transition-transform duration-700 group-hover:rotate-y-180 group-hover:scale-105">
 
             {/* FRONT */}
-            <div className="absolute inset-0 rounded-xl overflow-hidden shadow-xl backface-hidden border border-gray-300"
-              style={{ background: "linear-gradient(135deg, #9bb0d6, #9bb0d6, #4a7bd5)" }}>
+            <div
+              className="absolute inset-0 rounded-xl overflow-hidden shadow-xl backface-hidden border border-gray-300"
+              style={{ background: "linear-gradient(135deg, #9bb0d6, #9bb0d6, #4a7bd5)" }}
+            >
               <Image
                 src="https://soulsoft.in/wp-content/uploads/2025/04/Pending-stock-report-1536x1249.png"
                 alt="Pending Stock Report"
@@ -189,11 +225,7 @@ export default function HeroSection() {
 
             {/* BACK */}
             <div
-              className={`
-                absolute inset-0 rotate-y-180 backface-hidden 
-                rounded-xl shadow-xl p-4 flex flex-col justify-center 
-                border border-gray-400
-              `}
+              className="absolute inset-0 rotate-y-180 backface-hidden rounded-xl shadow-xl p-4 flex flex-col justify-center border border-gray-400"
               style={{ background: "linear-gradient(135deg, #9bb0d6, #9bb0d6, #4a7bd5)" }}
             >
               <h3 className="text-xl font-bold text-center text-black mb-4 drop-shadow">
@@ -207,11 +239,9 @@ export default function HeroSection() {
                     custom={i}
                     variants={featureVariants}
                     whileHover={{ scale: 1.1 }}
-                    className={`
-                      flex flex-col items-center bg-white/70 rounded-xl p-3 shadow 
-                      text-gray-800 font-semibold
-                      ${i === 4 ? "col-span-2 mx-auto w-2/3" : ""}
-                    `}
+                    className={`flex flex-col items-center bg-white/70 rounded-xl p-3 shadow text-gray-800 font-semibold ${
+                      i === 4 ? "col-span-2 mx-auto w-2/3" : ""
+                    }`}
                   >
                     <div className="text-2xl">{item.icon}</div>
                     <div className="text-sm">{item.label}</div>
@@ -225,6 +255,7 @@ export default function HeroSection() {
 
       </div>
 
+      {/* STYLES */}
       <style jsx>{`
         .preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }

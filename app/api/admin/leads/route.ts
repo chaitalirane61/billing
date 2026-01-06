@@ -37,7 +37,7 @@ export async function GET() {
   } catch (error) {
     console.error("GET /api/admin/leads error:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to fetch leads from ShopcareEnquiry table" },
+      { success: false, error: "Failed to fetch leads from kbazarEnquiry table" },
       { status: 500 }
     );
   }

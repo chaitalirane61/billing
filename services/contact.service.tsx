@@ -27,13 +27,13 @@ export const contactService = {
         .input("WhereDidYouHearAboutUs", sql.NVarChar(sql.MAX), parsed.data.heardAboutUs)
         .input("EnquiryDateTime", sql.DateTime, new Date())
         .query(`
-          INSERT INTO ShopcareEnquiry 
+          INSERT INTO kbazarEnquiry 
           (FullName, EmailAddress, PhoneNumber, BusinessName, Message, WhereDidYouHearAboutUs, EnquiryDateTime)
           VALUES 
           (@FullName, @EmailAddress, @PhoneNumber, @BusinessName, @Message, @WhereDidYouHearAboutUs, @EnquiryDateTime)
         `);
 
-      console.log("CONTACT SUBMITTED TO ShopcareEnquiry:", parsed.data);
+      console.log("CONTACT SUBMITTED TO kbazarEnquiry:", parsed.data);
 
       return {
         success: true as const,
@@ -64,14 +64,14 @@ export const contactService = {
           Message,
           WhereDidYouHearAboutUs,
           EnquiryDateTime
-        FROM ShopcareEnquiry
+        FROM kbazarEnquiry
         ORDER BY EnquiryDateTime DESC
       `);
 
       return result.recordset;
     } catch (error) {
-      console.error("Database error fetching from ShopcareEnquiry:", error);
-      throw new Error("Failed to fetch leads from ShopcareEnquiry table");
+      console.error("Database error fetching from kbazarEnquiry:", error);
+      throw new Error("Failed to fetch leads from kbazarEnquiry table");
     }
   },
 };

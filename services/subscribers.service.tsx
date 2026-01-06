@@ -23,7 +23,7 @@ export const subscriberService = {
         .input("Email", sql.VarChar(100), parsed.data.email)
         .input("SubscribedAt", sql.DateTime, new Date())
         .query(`
-          INSERT INTO ShopcareSubscribe (Email, SubscribedAt)
+          INSERT INTO kbazarSubscribe (Email, SubscribedAt)
           VALUES (@Email, @SubscribedAt)
         `);
 
@@ -52,7 +52,7 @@ export const subscriberService = {
           Id as id,
           Email as email,
           SubscribedAt as subscribedAt
-        FROM ShopcareSubscribe
+        FROM kbazarSubscribe
         ORDER BY SubscribedAt DESC
       `);
 
